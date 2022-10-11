@@ -110,8 +110,4 @@ Merge Job output annotations with data.table
 
 \author{
 Marcin Imielinski
-
-Marcin Imielinski
-
-Marcin Imielinski
 }

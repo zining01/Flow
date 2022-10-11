@@ -2044,9 +2044,11 @@ setGeneric('srun', function(.Object, ...) {standardGeneric('srun')})
 #' @title Runs jobs on Slurm
 #' @exportMethod srun
 #' @export
+#' @param all (logical) run all jobs even completed ones
+#' @param sleep (numeric) time to pause between job submissions in default
 #' @param mc.cores Number of parallel cores to run jobs with (=1)
 #' @author Marcin Imielinski, Zoran Gajic
-setMethod('srun', 'Job', function(.Object, mc.cores = 1, all = FALSE)
+setMethod('srun', 'Job', function(.Object, mc.cores = 1, all = FALSE, sleep = 0)
     {
         Slurmize(.Object)
         ####################
@@ -2072,7 +2074,8 @@ setMethod('srun', 'Job', function(.Object, mc.cores = 1, all = FALSE)
             ## } else {
                 ## p = pipe(x); out = readLines(p); close(p); return(out)
             ## })
-            p = pipe(x); out = readLines(p); close(p); return(out)
+            ## p = pipe(x); out = readLines(p); close(p); return(out)
+            p = pipe(x); out = readLines(p); close(p); Sys.sleep(sleep); return(out)
         })
         ## res = lapply(scmds, function(x) {
         ##     try2({
